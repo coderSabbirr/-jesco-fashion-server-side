@@ -32,7 +32,7 @@ async function run() {
         });
         
          app.get('/product/:id', async (req, res) => {
-            const id = req.params.id;
+            const id = (req.params.id).trim();
             const query = { _id: ObjectId(id) };
             const product = await productsCollection.findOne(query);
             res.json(product);
@@ -138,7 +138,7 @@ async function run() {
         });
 
         app.delete('/orders/:id', async (req, res) => {
-            const query = { _id: ObjectId(req.params.id) }
+            const query = { _id: ObjectId(req.params.id).trim() }
             const result = await orderCollection.deleteOne(query)
             res.json(result);
         })
